@@ -2,7 +2,7 @@
 
 ## ProceduralGeneration
 
-Generate your own random objects without overlapping
+Generate your objects without overlapping
 
 ## This is how it looks like
 
