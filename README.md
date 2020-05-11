@@ -2,8 +2,13 @@
 
 ## ProceduralGeneration
 
-# The Code
+Generate your own random objects without overlapping
 
+## This is how it looks like
+
+![Example](/Images/Example.gif)
+
+# Code
 
 using System.Collections;
 using System.Collections.Generic;
@@ -54,7 +59,8 @@ public class ObjectGenerator : MonoBehaviour
                 if (canSpawnHere)
                 {
                     GameObject newObject = Instantiate(objects[Random.Range(0, objects.Count)], spawnPosition,
-                                                       Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0), transform) as GameObject;
+                                                       Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0), transform) 
+                                                       as GameObject;
                     break;
                 }
                 catcher++;
@@ -115,7 +121,3 @@ public class ObjectGenerator : MonoBehaviour
         Gizmos.DrawWireSphere(this.transform.position, radius);
     }
 }
-
-##This is how it looks like
-
-![Example](/Images/Example.gif)
