@@ -46,13 +46,13 @@ public class ObjectGenerator : MonoBehaviour
                 if (canSpawnHere)
                 {
                     GameObject newObject = Instantiate(objects[Random.Range(0, objects.Count)], spawnPosition,
-                                                       Quaternion.identity, transform) as GameObject;
+                                                       Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0), transform) as GameObject;
                     break;
                 }
                 catcher++;
 
                 //prevent while loop crash
-                if (catcher > 50)
+                if (catcher > 500)
                 {
                     Debug.Log("Too many attempts");
                     break;
@@ -77,18 +77,24 @@ public class ObjectGenerator : MonoBehaviour
             Vector3 centerPoint = colliders[i].bounds.center;
             float width = colliders[i].bounds.extents.x;
             float height = colliders[i].bounds.extents.y;
+            float thickness = colliders[i].bounds.extents.z;
 
             float leftExtend = centerPoint.x - width - spacing;
             float rightExtend = centerPoint.x + width + spacing;
             float lowerExtend = centerPoint.y - height - spacing;
             float upperExtend = centerPoint.y + height + spacing;
+            float forwardExtend = centerPoint.z - thickness - spacing;
+            float backwardExtend = centerPoint.z + thickness + spacing;
 
             //Check overlaping
             if (spawnPosition.x >= leftExtend && spawnPosition.x <= rightExtend)
             {
                 if (spawnPosition.y >= lowerExtend && spawnPosition.y <= upperExtend)
                 {
-                    return false;
+                    if(spawnPosition.z >= forwardExtend && spawnPosition.z <= backwardExtend)
+                    {
+                        return false;
+                    }
                 }
             }
         }
